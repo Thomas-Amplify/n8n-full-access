@@ -19,9 +19,6 @@ export const pythonCodeDescription: INodeProperties[] = [
 		...commonDescription,
 	},
 	{
-		...commonDescription,
-	},
-	{
 		displayName:
 			'Debug by using <code>print()</code> statements and viewing their output in the browser console.',
 		name: 'notice',

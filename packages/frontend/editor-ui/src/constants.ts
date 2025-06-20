@@ -123,6 +123,7 @@ export const BAMBOO_HR_NODE_TYPE = 'n8n-nodes-base.bambooHr';
 export const CALENDLY_TRIGGER_NODE_TYPE = 'n8n-nodes-base.calendlyTrigger';
 export const CODE_NODE_TYPE = 'n8n-nodes-base.code';
 export const AI_CODE_NODE_TYPE = '@n8n/n8n-nodes-langchain.code';
+export const CODE_PYTHON_LOCAL_NODE_TYPE = 'n8n-nodes-base.codePythonLocal';
 export const AI_MCP_TOOL_NODE_TYPE = '@n8n/n8n-nodes-langchain.mcpClientTool';
 export const WIKIPEDIA_TOOL_NODE_TYPE = '@n8n/n8n-nodes-langchain.toolWikipedia';
 export const CRON_NODE_TYPE = 'n8n-nodes-base.cron';
@@ -239,6 +240,7 @@ export const NODES_USING_CODE_NODE_EDITOR = [
 	CODE_NODE_TYPE,
 	AI_CODE_NODE_TYPE,
 	AI_TRANSFORM_NODE_TYPE,
+	CODE_PYTHON_LOCAL_NODE_TYPE,
 ];
 
 export const NODE_POSITION_CONFLICT_ALLOWLIST = [STICKY_NODE_TYPE];
