@@ -60,6 +60,8 @@ export class CodePythonLocal implements INodeType {
 			context.items = context.$input.all();
 			const code = this.getNodeParameter('pythonCode', 0) as string;
 			const sandbox = new PythonLocalSandbox(context, code, this.helpers);
+			// Forward print() output to the UI console
+			sandbox.on('output', this.sendMessageToUI.bind(this));
 			let items: INodeExecutionData[];
 			try {
 				items = await sandbox.runCodeAllItems();
@@ -82,6 +84,8 @@ export class CodePythonLocal implements INodeType {
 			context.item = context.$input.item;
 			const code = this.getNodeParameter('pythonCode', index) as string;
 			const sandbox = new PythonLocalSandbox(context, code, this.helpers);
+			// Forward print() output to the UI console
+			sandbox.on('output', this.sendMessageToUI.bind(this));
 			try {
 				const item = await sandbox.runCodeEachItem(index);
 				if (item) {

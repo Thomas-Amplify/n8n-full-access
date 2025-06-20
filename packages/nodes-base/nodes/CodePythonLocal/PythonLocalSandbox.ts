@@ -6,12 +6,16 @@ import type { SandboxContext } from './Sandbox';
 
 const PYTHON_EXECUTABLE = process.env.N8N_PYTHON_EXECUTABLE || 'python';
 
-export class PythonLocalSandbox {
+import { EventEmitter } from 'events';
+
+export class PythonLocalSandbox extends EventEmitter {
 	constructor(
 		private context: SandboxContext,
 		private pythonCode: string,
 		private helpers: IExecuteFunctions['helpers'],
-	) {}
+	) {
+		super();
+	}
 
 	async runCodeAllItems(): Promise<INodeExecutionData[]> {
 		const result = await this.runCode();
@@ -27,9 +31,9 @@ export class PythonLocalSandbox {
 	private runCode(): Promise<unknown> {
 		return new Promise((resolve, reject) => {
 			const wrapper = [];
-			wrapper.push('import sys,json');
+			wrapper.push('import sys, json, builtins');
 			wrapper.push(
-				'print = lambda *args, **kwargs: __builtins__["print"](*args, file=sys.stderr, **kwargs)',
+				'print = lambda *args, **kwargs: builtins.print(*args, file=sys.stderr, **kwargs)',
 			);
 			wrapper.push('ctx = json.loads(sys.stdin.read())');
 			wrapper.push('globals().update(ctx)');
@@ -62,7 +66,8 @@ export class PythonLocalSandbox {
 			proc.stderr.on('data', (data) => {
 				const str = data.toString();
 				stderr += str;
-				this.context.helpers.logger.info(str);
+				// Emit print output to allow UI display
+				this.emit('output', str);
 			});
 			proc.on('error', (err: Error & { code?: string }) => {
 				if (err.code === 'ENOENT') {
