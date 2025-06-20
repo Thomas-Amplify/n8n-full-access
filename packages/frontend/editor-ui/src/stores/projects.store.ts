@@ -56,21 +56,13 @@ export const useProjectsStore = defineStore(STORES.PROJECTS, () => {
 		projects.value.filter((p) => p.type === ProjectTypes.Personal),
 	);
 	const teamProjects = computed(() => projects.value.filter((p) => p.type === ProjectTypes.Team));
-	const teamProjectsLimit = computed(() => settingsStore.settings.enterprise.projects.team.limit);
-	const isTeamProjectFeatureEnabled = computed<boolean>(() => teamProjectsLimit.value !== 0);
-	const hasUnlimitedProjects = computed<boolean>(() => teamProjectsLimit.value === -1);
-	const isTeamProjectLimitExceeded = computed<boolean>(
-		() => projectsCount.value.team >= teamProjectsLimit.value,
-	);
-	const canCreateProjects = computed<boolean>(
-		() =>
-			(hasUnlimitedProjects.value ||
-				(isTeamProjectFeatureEnabled.value && !isTeamProjectLimitExceeded.value)) &&
-			!sourceControlStore.preferences.branchReadOnly,
-	);
-	const hasPermissionToCreateProjects = computed(() =>
-		hasPermission(['rbac'], { rbac: { scope: 'project:create' } }),
-	);
+	// Disable license gating for projects: always allow feature and creation
+	const teamProjectsLimit = computed(() => -1);
+	const isTeamProjectFeatureEnabled = computed<boolean>(() => true);
+	const hasUnlimitedProjects = computed<boolean>(() => true);
+	const isTeamProjectLimitExceeded = computed<boolean>(() => false);
+	const canCreateProjects = computed<boolean>(() => !sourceControlStore.preferences.branchReadOnly);
+	const hasPermissionToCreateProjects = computed<boolean>(() => true);
 
 	const projectNavActiveId = computed<string | string[] | null>({
 		get: () => route?.params?.projectId ?? projectNavActiveIdState.value,

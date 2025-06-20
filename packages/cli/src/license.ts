@@ -212,8 +212,11 @@ export class License implements LicenseProvider {
 		this.logger.debug('License shut down');
 	}
 
-	isLicensed(feature: BooleanLicenseFeature) {
-		return this.manager?.hasFeatureEnabled(feature) ?? false;
+	/**
+	 * License guard disabled: always allow enterprise features.
+	 */
+	isLicensed(_feature: BooleanLicenseFeature) {
+		return true;
 	}
 
 	/** @deprecated Use `LicenseState.isSharingLicensed` instead. */

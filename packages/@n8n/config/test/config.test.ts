@@ -274,7 +274,7 @@ describe('GlobalConfig', () => {
 		},
 		generic: {
 			timezone: 'America/New_York',
-			releaseChannel: 'dev',
+			releaseChannel: 'stable',
 			gracefulShutdownTimeout: 30,
 		},
 		license: {

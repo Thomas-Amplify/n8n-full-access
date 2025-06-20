@@ -7,6 +7,13 @@ FROM --platform=linux/amd64 n8nio/base:${NODE_VERSION} AS builder
 WORKDIR /src
 COPY . /src
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store --mount=type=cache,id=pnpm-metadata,target=/root/.cache/pnpm/metadata DOCKER_BUILD=true pnpm install --frozen-lockfile
+
+ENV TURBO_CACHE_DIR=/tmp/turbo-cache
+ENV TURBO_ENV_MODE=loose
+RUN mkdir -p /tmp/turbo-cache
+
+ENV TURBO_CONCURRENCY=1
+
 RUN pnpm build
 
 # Delete all dev dependencies

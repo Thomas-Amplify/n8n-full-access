@@ -191,8 +191,11 @@ export class LicenseState {
 		return this.getValue('quota:insights:retention:pruneIntervalDays') ?? 24;
 	}
 
+	/**
+	 * License guard disabled: always unlimited team projects.
+	 */
 	getMaxTeamProjects() {
-		return this.getValue('quota:maxTeamProjects') ?? 0;
+		return UNLIMITED_LICENSE_QUOTA;
 	}
 
 	getMaxWorkflowsWithEvaluations() {

@@ -12,7 +12,7 @@ export class GenericConfig {
 	timezone: string = 'America/New_York';
 
 	@Env('N8N_RELEASE_TYPE', releaseChannelSchema)
-	releaseChannel: ReleaseChannel = 'dev';
+	releaseChannel: ReleaseChannel = 'stable';
 
 	/** Grace period (in seconds) to wait for components to shut down before process exit. */
 	@Env('N8N_GRACEFUL_SHUTDOWN_TIMEOUT')

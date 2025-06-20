@@ -22,9 +22,8 @@ export const useInsightsStore = defineStore('insights', () => {
 		settingsStore.settings.activeModules.includes('insights'),
 	);
 
-	const isDashboardEnabled = computed(
-		() => settingsStore.moduleSettings.insights?.dashboard ?? false,
-	);
+	/** License guard disabled: toujours afficher le dashboard Insights */
+	const isDashboardEnabled = computed(() => true);
 
 	const isSummaryEnabled = computed(
 		() => globalInsightsPermissions.value.list && isInsightsEnabled.value,

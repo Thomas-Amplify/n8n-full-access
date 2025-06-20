@@ -53,9 +53,6 @@ export async function initializeCore() {
 	});
 
 	const banners: BannerName[] = [];
-	if (settingsStore.isEnterpriseFeatureEnabled.showNonProdBanner) {
-		banners.push('NON_PRODUCTION_LICENSE');
-	}
 	if (
 		!(settingsStore.settings.banners?.dismissed || []).includes('V1') &&
 		settingsStore.settings.versionCli.startsWith('1.')

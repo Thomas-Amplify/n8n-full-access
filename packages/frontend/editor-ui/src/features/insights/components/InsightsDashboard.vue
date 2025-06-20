@@ -10,9 +10,6 @@ import InsightsDateRangeSelect from './InsightsDateRangeSelect.vue';
 import InsightsUpgradeModal from './InsightsUpgradeModal.vue';
 import { useDocumentTitle } from '@/composables/useDocumentTitle';
 
-const InsightsPaywall = defineAsyncComponent(
-	async () => await import('@/features/insights/components/InsightsPaywall.vue'),
-);
 const InsightsChartTotal = defineAsyncComponent(
 	async () => await import('@/features/insights/components/charts/InsightsChartTotal.vue'),
 );
@@ -149,11 +146,7 @@ onMounted(() => {
 				:class="$style.insightsBanner"
 			/>
 			<div :class="$style.insightsContent">
-				<InsightsPaywall
-					v-if="!insightsStore.isDashboardEnabled"
-					data-test-id="insights-dashboard-unlicensed"
-				/>
-				<div v-else :class="$style.insightsContentWrapper">
+				<div :class="$style.insightsContentWrapper">
 					<div
 						:class="[
 							$style.dataLoader,

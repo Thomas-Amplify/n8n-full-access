@@ -109,6 +109,7 @@ describe('Init', () => {
 		});
 
 		it('should initialize uiStore with banners based on settings', async () => {
+			// Only version banner, non-production banner is disabled
 			settingsStore.isEnterpriseFeatureEnabled.showNonProdBanner = true;
 			settingsStore.settings.banners = { dismissed: [] };
 			settingsStore.settings.versionCli = '1.2.3';
@@ -116,7 +117,7 @@ describe('Init', () => {
 			await initializeCore();
 
 			expect(uiStore.initialize).toHaveBeenCalledWith({
-				banners: ['NON_PRODUCTION_LICENSE', 'V1'],
+				banners: ['V1'],
 			});
 		});
 	});
