@@ -1,0 +1,19 @@
+{
+	"node": "n8n-nodes-base.codePythonLocal",
+	"icon": "file:codePythonLocal.svg",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"details": "The Code (Python Local) node allows you to execute Python code locally using the host interpreter.",
+	"categories": ["Development", "Core Nodes"],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.code/"
+			}
+		]
+	},
+	"alias": ["python", "code", "local python", "script"],
+	"subcategories": {
+		"Core Nodes": ["Helpers", "Data Transformation"]
+	}
+}

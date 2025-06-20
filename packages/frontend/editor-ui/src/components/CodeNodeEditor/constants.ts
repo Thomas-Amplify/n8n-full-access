@@ -60,7 +60,8 @@ for item in _input.all():
 return _input.all()`.trim(),
 		runOnceForEachItem: `
 # Add a new field called 'myNewField' to the JSON of the item
-_input.item.json.myNewField = 1
-return _input.item`.trim(),
+item_json = _item['json']
+item_json['myNewField'] = 1
+return _item`.trim(),
 	},
 };
